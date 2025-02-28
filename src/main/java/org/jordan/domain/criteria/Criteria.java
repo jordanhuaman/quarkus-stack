@@ -21,7 +21,7 @@ public class Criteria {
     public static Criteria deserializeCriteria(StoreFilter storeFilter){
         return new Criteria(
                 Criteria.obtainFiltersToCriteria(storeFilter.getFilterIns()),
-                null);
+                Criteria.obtainOrderToCriteria(storeFilter.getOrderBy(), storeFilter.getOrder()));
     }
 
     public static Filters obtainFiltersToCriteria(List<FilterIn> filters){
