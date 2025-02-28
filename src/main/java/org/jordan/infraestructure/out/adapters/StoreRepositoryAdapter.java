@@ -5,7 +5,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jordan.application.out.StoreRepositoryAdapterPort;
 import org.jordan.domain.BookEntity;
+import org.jordan.domain.StoreEntity;
+import org.jordan.domain.criteria.*;
 import org.jordan.domain.dto.Store;
+import org.jordan.domain.in.StoreFilter;
 import org.jordan.infraestructure.out.repository.BookRepository;
 import org.jordan.infraestructure.out.repository.StoreRepository;
 
@@ -49,5 +52,12 @@ public class StoreRepositoryAdapter implements StoreRepositoryAdapterPort {
                     List<Store> stores = new ArrayList<>();
                     return stores;
                 });
+    }
+
+    @Override
+    public Uni<List<StoreEntity>> getStoresByFilters(StoreFilter storeFilter) {
+        Criteria criteria = Criteria.deserializeCriteria(storeFilter);
+        System.out.println(criteria.toString());
+        return Uni.createFrom().item(new ArrayList<>());
     }
 }

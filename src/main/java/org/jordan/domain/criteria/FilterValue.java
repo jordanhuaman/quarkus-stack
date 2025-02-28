@@ -1,7 +1,13 @@
 package org.jordan.domain.criteria;
 
-public class FilterValue {
-    public FilterValue(final String value){
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class FilterValue {
+    private String value;
+    public FilterValue(final String value){
+        this.value = value;
     }
 }

@@ -1,13 +1,11 @@
-package org.jordan.application.out;
+package org.jordan.application.in;
 
 import io.smallrye.mutiny.Uni;
 import org.jordan.domain.StoreEntity;
-import org.jordan.domain.dto.Store;
 import org.jordan.domain.in.StoreFilter;
 
 import java.util.List;
 
-public interface StoreRepositoryAdapterPort {
-    Uni<List<Store>> getAllStores();
+public interface GetStoresByFiltersUseCase {
     Uni<List<StoreEntity>> getStoresByFilters(StoreFilter storeFilter);
 }
