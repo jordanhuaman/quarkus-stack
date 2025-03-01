@@ -56,7 +56,9 @@ public class StoreRepositoryAdapter implements StoreRepositoryAdapterPort {
 
     @Override
     public Uni<List<StoreEntity>> getStoresByFilters(StoreFilter storeFilter) {
-        Criteria criteria = Criteria.deserializeCriteria(storeFilter);
+        // Criteria criteria = Criteria.deserializeCriteria(storeFilter);
+        //TODO: same way
+        Criteria criteria = Criteria.fromPrimitive(storeFilter);
         System.out.println(criteria.getOrder().getOrderBy().getValue());
         return Uni.createFrom().item(new ArrayList<>());
     }
