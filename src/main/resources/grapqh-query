@@ -1,0 +1,18 @@
+query GetStoresByFilters {
+    GetStoresByFilters(storeFilter: { order: ASC, orderBy: "asc", filterIns: [
+         {
+            name: "category",
+            operator: EQUAL,
+            value: "books"
+        },
+        {
+            name: "price",
+            operator: EQUAL,
+            value: "100"
+        }
+    ] }) {
+        bookIds
+        id
+        name
+    }
+}
