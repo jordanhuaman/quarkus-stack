@@ -16,4 +16,8 @@ public class Order {
     public static Order none(){
         return new Order(new OrderBy(""), new OrderType(OrderTypes.NONE));
     }
+    public static Order fromPrimitives(String orderBy,OrderTypes orderTypes){
+        return orderBy != null ? new Order(new OrderBy(orderBy),new OrderType(orderTypes)) : Order.none();
+    }
+
 }

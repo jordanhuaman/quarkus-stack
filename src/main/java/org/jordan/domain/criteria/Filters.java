@@ -13,4 +13,18 @@ public class Filters {
     public Filters(final List<Filter> filters){
         this.filters = filters;
     }
+    public static Filters fromPrimitives(List<FilterRecord> filters){
+        if (filters == null){
+            return new Filters(new ArrayList<>());
+        }
+        return new Filters(
+                filters
+                        .stream()
+                        .map(filter ->
+                                Filter.fromPrimitives(
+                                        filter.field(),
+                                        filter.operator()
+                                        ,filter.value()))
+                        .toList());
+    }
 }

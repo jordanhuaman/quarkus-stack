@@ -14,4 +14,8 @@ public class Filter {
         this.filterOperator = filterOperator;
         this.filterValue = filterValue;
     }
+
+    public static Filter fromPrimitives(String field, Operator operator, String value ){
+        return new Filter(new FilterField(field), new FilterOperator(operator), new FilterValue(value));
+    }
 }

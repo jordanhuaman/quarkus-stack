@@ -1,7 +1,6 @@
 package org.jordan.domain.criteria;
 
 import lombok.*;
-import org.jordan.domain.in.FilterIn;
 import org.jordan.domain.in.StoreFilter;
 
 import java.util.ArrayList;
@@ -18,20 +17,27 @@ public class Criteria {
         this.order = order;
     }
 
+    //TODO: delegate the logic to each class with 'fromPrimitives
+    public static Criteria fromPrimitive(StoreFilter storeFilter){
+        return new Criteria(
+                Filters.fromPrimitives(storeFilter.getFilterIns()),
+                Order.fromPrimitives(storeFilter.getOrderBy(), storeFilter.getOrder())
+        );
+    }
     public static Criteria deserializeCriteria(StoreFilter storeFilter){
         return new Criteria(
                 Criteria.obtainFiltersToCriteria(storeFilter.getFilterIns()),
                 Criteria.obtainOrderToCriteria(storeFilter.getOrderBy(), storeFilter.getOrder()));
     }
 
-    public static Filters obtainFiltersToCriteria(List<FilterIn> filters){
+    public static Filters obtainFiltersToCriteria(List<FilterRecord> filters){
         if (filters==null || filters.size()==0){
             return new Filters(new ArrayList<>());
         }
 
         List<Filter> filterList = filters.stream().map(filterIn -> {
-            FilterField filterField = new FilterField(filterIn.getName());
-            FilterOperator filterOperator = new FilterOperator(filterIn.getOperator());
+            FilterField filterField = new FilterField(filterIn.field());
+            FilterOperator filterOperator = new FilterOperator(filterIn.operator());
             FilterValue filterValue = new FilterValue(filterField.getValue());
             return new Filter(filterField,filterOperator,filterValue);
         }).toList();
